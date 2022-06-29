@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 function ListSquareEle(props) {
   const link = props.link;

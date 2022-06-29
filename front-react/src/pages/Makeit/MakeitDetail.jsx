@@ -18,8 +18,6 @@ function MakeitDetail() {
       dispatch(fetchItemDetail(id))
     }, [dispatch, id])
     
-    console.log(id);
-    console.log(itemInfo);
   return (
     <div>
         <Header></Header>

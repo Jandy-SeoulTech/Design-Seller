@@ -10,16 +10,17 @@ function ItemOptionSelector({options}) {
 
     const purchaseSheet = useSelector(state => state.purchase.shoppingList)
     const totalPrice = useSelector(state => state.purchase.totalPrice)
-    const quantityHandler = (amount, name, price) => {
+    const quantityHandler = (amount, name, price, idx) => {
         const newPurchaseSheet = purchaseSheet.filter(x => x.name !== name);
         if (amount === 0) {
             dispatch(setShoppingList(newPurchaseSheet));
         }
         else {
             let obj = {
+                id : idx,
                 name : name,
                 amount : amount,
-                price : price
+                price : price,
             };
             newPurchaseSheet.push(obj);
             dispatch(setShoppingList(newPurchaseSheet));
@@ -48,7 +49,7 @@ function ItemOptionSelector({options}) {
                     {opt.name} ({opt.price})
                 </ItemOptionLabel>
                 <ItemQtyBox>
-                <QuantityPicker min={0} max={5} onChange={(value) => quantityHandler(value, opt.name,opt.price)} ></QuantityPicker>
+                <QuantityPicker min={0} max={5} onChange={(value) => quantityHandler(value, opt.name,opt.price, idx)} ></QuantityPicker>
                 </ItemQtyBox>
             </ItemDetails>
             )}
@@ -72,33 +73,35 @@ const ItemDetails = styled.div`
 `
 
 
-const ItemOptionLabel = styled.ul`
+const ItemOptionLabel = styled.div`
     position : absolute;
     left : 10px;
     font-size: 14px;
-    line-height: 24px;
+    line-height: 50px;
     margin-right: 40px
 `
 
 const ItemQtyBox = styled.div`
     position : absolute;
-    right : 30px;
+    right : 1px;
 `
 
 const Line = styled.hr`
   border: solid 0.2px #ebebeb;
-  width: 92%;
+  width: 100%;
 `;
 
-const ItemPriceLabel = styled.ul`
+const ItemPriceLabel = styled.div`
     position : absolute;
+    top : 20px;
     left : 10px;
     font-size: 20px;
     line-height: 36px;
     font-weight : bold;
 `
-const ItemPriceContent = styled.ul`
+const ItemPriceContent = styled.div`
     position : absolute;
+    top : 20px;
     right : 30px;
     font-size: 30px;
     line-height: 36px;

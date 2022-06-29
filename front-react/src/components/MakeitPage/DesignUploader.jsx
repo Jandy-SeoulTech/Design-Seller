@@ -9,7 +9,6 @@ import { setFileStoragePath } from '../../reducers/purchaseApi';
 function DesignUploader() {
     const [files, setFiles] = useState([]);
     const [cookies, ] = useCookies(['user_token']);
-    console.log(cookies.user_token);
     const dispatch = useDispatch(); 
 
     //파일 경로 받기
@@ -27,9 +26,11 @@ function DesignUploader() {
                 filepath : res.data.images,
                 state : "completed"
             }
-            dispatch(setFileStoragePath(payload))
-            });
-        setFiles([]);
+            dispatch(setFileStoragePath(payload));
+            alert('성공적으로 업로드 되었습니다!');
+            setFiles([]);
+            }).catch((err) => alert(err.message));
+        
     }
 
     const handleUpload = (e) => {

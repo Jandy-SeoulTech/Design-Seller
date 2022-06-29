@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchItemOptions, fetchItemList } from '../../reducers/categoryApi'
 import ListIndexPage from '../../components/common/list/ListIndexPage'
 import { flushShoppingList } from '../../reducers/purchaseApi'
+import { Header } from '../../components/common'
 
 function MakeitCategory() {
   const dispatch = useDispatch();
@@ -14,13 +15,14 @@ function MakeitCategory() {
 
   useEffect(() => {
     dispatch(fetchItemOptions());
-    dispatch(fetchItemList(listOptions))
+    dispatch(fetchItemList(listOptions));
     dispatch(flushShoppingList());
-  })
+  },)
   
   
   return (
     <div>
+      <Header></Header>
         <Box>
             <Box sx={{m: '0 auto', backgroundColor: '#FFE664'}}>
                 <OptionSelector ></OptionSelector>

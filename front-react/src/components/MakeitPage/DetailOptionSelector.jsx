@@ -6,11 +6,8 @@ import { selectSubCate } from '../../reducers/categoryApi';
 
 function DetailOptionSelector() {
     const dispatch = useDispatch();
-    const allCategories = useSelector((state) => state.category.allCategories);
     const selectedOptions = useSelector((state) => state.category.selected);
     const subCate = selectedOptions.subcategory ?? [];
-    console.log(subCate);
-    console.log(allCategories, selectedOptions);
 
 
     const optionClickHandler = (cateID) => {

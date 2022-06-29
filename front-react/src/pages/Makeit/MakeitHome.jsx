@@ -38,9 +38,9 @@ function MakeitHome() {
             <SearchBox/>
               <ListCircle1x5 header={headers[0]} onClickHandler={onClickHandler}></ListCircle1x5>
               <Divider></Divider>
-              <ListSquare1x4 header={headers[1]}></ListSquare1x4>
+              <ListSquare1x4 header={headers[1]} link="makeit/detail" ></ListSquare1x4>
               <Divider></Divider>
-              <ListSquare1x5 header={headers[2]}></ListSquare1x5>
+              <ListSquare1x5 header={headers[2]} link="makeit/detail"></ListSquare1x5>
         </Box>
       </Container>
     </div>

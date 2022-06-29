@@ -1,32 +1,39 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Box, TextField, Divider } from '@mui/material'
+import { Box, TextField, Divider, Button, Modal} from '@mui/material'
 
-function InputDeliveryInfo() {
+import SearchAddress from './SearchAddress';
+
+function InputDeliveryInfo({props}) {
     const dispatch = useDispatch();
-    const [userInfo, setUserInfo] = useState(
+    const [toggle, settoggle] = useState(false)
+    const [addressInfo, setAddressInfo] = useState(
         {
-            name : "",
-            phone : "",
-            email : "",
+            street : "",
+            zipcode : "",
+            detail : "",
         }
     );
 
-    const nameHandler = (e) => {
-        setUserInfo({...userInfo, name : e.currentTarget.value});
+    const detailHandler = (e) => {
+        setAddressInfo({...addressInfo, detail : e.currentTarget.value});
     }
-    const phoneHandler = (e) => {
-        setUserInfo({...userInfo, phone : e.currentTarget.value});
-    }
-    const emailHandler = (e) => {
-        setUserInfo({...userInfo, email : e.currentTarget.value});
-    }
-
-    useEffect(() => {
-        
-    }, [dispatch, userInfo])
     
+    const addressHandler = (street, zipcode) => {
+        console.log(street, zipcode);
+        setAddressInfo({
+            ...addressInfo,
+            street : street,
+            zipcode : zipcode
+        })
+    }
+    
+    useEffect(() => {
+      console.log(addressInfo)
+    }, [addressInfo])
+    
+
   return (
     <div>
         <StyledH3>배송지</StyledH3>
@@ -38,11 +45,15 @@ function InputDeliveryInfo() {
               width: 500,
               m: 3}}>
               <Label sx={{gridRow: '1', gridColumn : '1'}}>주소</Label>
-              <TextField type='name' sx={{gridRow: '1',gridColumn : '2/6'}}onChange={nameHandler}></TextField>
-              <Label sx={{gridRow : '2', gridColumn : '1'}}>상세주소</Label>
-              <TextField type='tel' sx={{gridRow : '2', gridColumn : '2/6'}} onChange={phoneHandler}></TextField>
-              <Label sx={{gridRow : '3', gridColumn : '1'}}>배송메모</Label>
-              <TextField type='email' sx={{gridRow : '3', gridColumn : '2/6'}} onChange={emailHandler}></TextField>
+              <TextField type='address' disabled sx={{gridRow: '1',gridColumn : '2/5'}} value={addressInfo.street}></TextField>
+              {/* 우편번호 검색 모달창 띄우고 request 보내는 걸로 마무리 */}
+              <Label sx={{gridRow: '2', gridColumn : '1'}}>우편번호</Label>
+              <TextField type='number' disabled sx={{gridRow: '2',gridColumn : '2/6'}} value={addressInfo.zipcode}></TextField>
+              <SearchAddress addressHandler={addressHandler}/>
+              <Label sx={{gridRow : '3', gridColumn : '1'}}>상세주소</Label>
+              <TextField type='text' sx={{gridRow : '3', gridColumn : '2/6'}} onChange={detailHandler}></TextField>
+              <Label sx={{gridRow : '4', gridColumn : '1'}}>배송메모</Label>
+              <TextField type='text' sx={{gridRow : '4', gridColumn : '2/6'}}></TextField>
             </Box>
     </div>
   )

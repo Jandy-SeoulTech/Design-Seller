@@ -3,10 +3,9 @@ import { React, useState, useEffect } from "react";
 import ListSquareEle from "./element/ListSquareEle";
 import styled from "styled-components";
 
-function ListCircle1x5({header, items}) {
+function ListSquare1x5({header, items, link}) {
     //얻어오는 데이터에 따라 market or makeit로 구분-> 하위 element의 link 가 바뀌게 됨
-    const link = "makeit/detail"; 
-    console.log(items);
+    // const link = "makeit/detail"; 
   
   return (
     <div>
@@ -24,7 +23,7 @@ function ListCircle1x5({header, items}) {
               <ListSquareEle item={item} size={220} link={link}></ListSquareEle>
             </Box>
           </div>
-        ))}
+        )}
       </Box>
     </div>
   );
@@ -43,4 +42,4 @@ const MoreBtn = styled.button`
   right: 3px;
 `;
 
-export default ListCircle1x5;
+export default ListSquare1x5;

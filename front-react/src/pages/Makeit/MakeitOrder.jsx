@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie';
 import { Box, Container, Divider, Typography, Button } from '@mui/material';
@@ -7,13 +7,14 @@ import styled from 'styled-components';
 import Header from '../../components/common/Header';
 import DesignUploader from '../../components/makeitPage/DesignUploader';
 import purchaseBtn from '../../assets/img/purchaseBtn.png'
+import { setRequestItems } from '../../reducers/purchaseApi';
 
 function MakeitOrder() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {id} = useParams();
     const [cookie, ] = useCookies(['user_token']);
     const uploadSuccess = useSelector(state => state.purchase.fileUploadState);
-    
     const shoppingList = useSelector(state => state.purchase.shoppingList);
     const totalPrice = useSelector(state => state.purchase.totalPrice)
     const itemInfo = useSelector(state => state.category.itemInfo);
@@ -27,10 +28,16 @@ function MakeitOrder() {
 
     
     const nextLink = (e) => {
-        e.preventDefault();
         if (uploadSuccess === "completed") {
-            const nexturl = "/makeit/purchase/"+id+"/"+cookie.user_token;
-            navigate(nexturl);
+            let optionList = shoppingList.map(({id, amount}) => Object.assign({}, {id : id, count: amount}))
+            let payload = {
+                prodId: itemInfo.id,
+                shoppingList : optionList,
+            }
+            console.log(payload);
+            dispatch(setRequestItems(payload))
+            // const nexturl = "/makeit/purchase/"+id+"/"+cookie.user_token;
+            // return navigate(nexturl);
         }
         else (alert('도안 파일이 업로드 되지 않았습니다.'))
     }
