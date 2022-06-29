@@ -2,7 +2,7 @@ import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 //!!!!!!aws 정보 입력해야함!!!
-const API_BASE_URL = "";
+const API_BASE_URL = "http://13.124.100.213:8080/oauth2/authorization/kakao";
 
 const user = JSON.parse(localStorage.getItem("user"));
 

@@ -3,7 +3,7 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 
 import userSlice from "./userApi";
 import productSlice from "./productApi";
-import { history } from "./history";
+import { history } from "../reducers/history";
 
 console.log(history.location);
 const rootReducer = combineReducers({

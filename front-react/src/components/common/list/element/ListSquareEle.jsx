@@ -37,8 +37,11 @@ function ListSquareEle(props) {
         </Box>
       </Box>
     </Link>
-  )
+  );
 }
-
-
-export default ListSquareEle
+const StyledImg = styled.img`
+  max-width: 289px;
+  max-height: 304px;
+  min-width: 50wh;
+`;
+export default ListSquareEle;

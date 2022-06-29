@@ -1,6 +1,6 @@
-import { Box } from '@mui/material'
-import { React, useState } from 'react'
-import ListSquareEle from './element/ListSquareEle'
+import { Box } from "@mui/material";
+import { React, useState, useEffect } from "react";
+import ListSquareEle from "./element/ListSquareEle";
 import styled from "styled-components";
 
 function ListCircle1x5({header, items}) {
@@ -23,25 +23,24 @@ function ListCircle1x5({header, items}) {
             }}>
               <ListSquareEle item={item} size={220} link={link}></ListSquareEle>
             </Box>
-            </div>
-            )}
-        </Box>
+          </div>
+        ))}
+      </Box>
     </div>
-  )
+  );
 }
 const StyledH = styled.p`
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
-    position : relative;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
 `;
 
 const MoreBtn = styled.button`
-    position : absolute;
-    right : 3px
-`
+  position: absolute;
+  right: 3px;
+`;
 
-
-export default ListCircle1x5
+export default ListCircle1x5;

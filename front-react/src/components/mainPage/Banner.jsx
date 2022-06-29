@@ -33,7 +33,7 @@ const StyledSlider = styled(Slider)`
     margin: 0 auto;
     height: 300px;
     color: white;
-    background-color: black;
+    background-color: #ffd600;
   }
 `;
 export default Banner;
