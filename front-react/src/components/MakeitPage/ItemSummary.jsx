@@ -10,7 +10,7 @@ import { useCookies } from 'react-cookie'
 function ItemSummary({itemInfo}) {
     const navigate = useNavigate();
     const {id, company, name, productionThumbnailImage, category, options ,description, like} = itemInfo;
-    const [cookies, ] = useCookies(['user_token']);
+    const [cookies, ] = useCookies([]);
 
     const goOrderHandler = () => {
         navigate(`/makeit/order/${id}/${cookies.user_token}`)

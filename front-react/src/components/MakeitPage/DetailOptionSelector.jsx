@@ -1,5 +1,5 @@
 import { Box, Container } from '@mui/material'
-import React, {useEffect} from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { selectSubCate } from '../../reducers/categoryApi';

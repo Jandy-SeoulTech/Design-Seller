@@ -6,8 +6,6 @@ import { Box, TextField, Divider, Button, Modal} from '@mui/material'
 import SearchAddress from './SearchAddress';
 
 function InputDeliveryInfo({props}) {
-    const dispatch = useDispatch();
-    const [toggle, settoggle] = useState(false)
     const [addressInfo, setAddressInfo] = useState(
         {
             street : "",
@@ -28,10 +26,6 @@ function InputDeliveryInfo({props}) {
             zipcode : zipcode
         })
     }
-    
-    useEffect(() => {
-      console.log(addressInfo)
-    }, [addressInfo])
     
 
   return (
