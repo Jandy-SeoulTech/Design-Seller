@@ -26,10 +26,6 @@ function MakeitHome() {
     navigate("/makeit/category", { selected: e.id });
   };
 
-   const onClickHandler = (e) => {
-    dispatch(selectCate(allCategories[e.id-1]));
-    navigate('/makeit/category', {selected : e.id});
-   }
 
    useEffect(() => {
     dispatch(fetchItemOptions());

@@ -41,8 +41,8 @@ function MakeitOrder() {
                 shoppingList : optionList,
             }
             dispatch(setRequestItems(payload))
-            // const nexturl = "/makeit/purchase/"+id+"/"+cookie.user_token;
-            // return navigate(nexturl);
+            const nexturl = "/makeit/purchase/"+id+"/"+cookie.user_token;
+            return navigate(nexturl);
         }
         else (alert('도안 파일이 업로드 되지 않았습니다.'))
     }
@@ -50,15 +50,8 @@ function MakeitOrder() {
       alert("로그인 세션이 없습니다.");
       navigate(-1);
     }
-  });
 
-  const nextLink = (e) => {
-    e.preventDefault();
-    if (uploadSuccess === "completed") {
-      const nexturl = "/makeit/purchase/" + id + "/" + cookie.user_token;
-      navigate(nexturl);
-    } else alert("도안 파일이 업로드 되지 않았습니다.");
-  };
+
   return (
     <div>
       <Header></Header>

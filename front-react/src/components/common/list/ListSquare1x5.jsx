@@ -26,7 +26,7 @@ function ListSquare1x5({header, items, link}) {
         }}
       >
         {items &&
-          items.map((item, index) => (
+          items.map((item, index) => 
             <div key={index}>
             <Box gridRow={1} sx={{
                 textAlign: 'left' 

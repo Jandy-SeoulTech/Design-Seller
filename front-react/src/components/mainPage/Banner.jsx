@@ -34,14 +34,13 @@ function Banner() {
 }
 const StyledSlider = styled(Slider)`
   .slick-list {
-    width: 100vh;
+    max-width: 100vw;
+    min-width : 1080px;
     margin: 0 auto;
-    height: 300px;
     color: white;
     background-color: #ffd600;
   }
 `;
 const BannerImg = styled.img`
-  height: 400px;
 `;
 export default Banner;

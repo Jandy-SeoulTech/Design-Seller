@@ -5,14 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../../reducers/user';
 
 const Logout = () => {
-    const [ , , removeCookie] = useCookies("user_token");
+    const [ , , removeCookie] = useCookies([]);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const logoutHandler = () => {
         removeCookie("user_token", { path : '/'});
-        sessionStorage.removeItem("user_token");
-        localStorage.removeItem("user_token");
+        removeCookie("nick_name", { path : '/'});
         dispatch(logout());
     }
     

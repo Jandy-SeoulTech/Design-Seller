@@ -45,9 +45,8 @@ function MakeitCategory(props) {
         ) : (
           <ListIndexPage items={items}></ListIndexPage>
         )}
-      </Box>
     </div>
-  );
+  )
 }
 
 export default MakeitCategory;
