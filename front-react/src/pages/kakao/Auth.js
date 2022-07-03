@@ -7,7 +7,7 @@ import { login } from '../../reducers/user';
 function Auth() {
     const token = new URL(window.location.href).searchParams.get("token");
     const nickname = new URL(window.location.href).searchParams.get("nickname");
-    const [cookies, setCookie] = useCookies(['user_token']);
+    const [, setCookie] = useCookies([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ function Auth() {
         if (token) {
           //쿠키 저장
           setCookie('user_token', token, { path : '/', expires : expires});
+          setCookie('nick_name', nickname, {path: '/', expires: expires});
         }
     }
     const setNickname = () => {

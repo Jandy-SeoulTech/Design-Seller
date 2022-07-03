@@ -20,17 +20,17 @@ function ListCircle1x5({header, lists, onClickHandler}) {
               mb : 4,
             }}>
             {allCategories && allCategories.map((category, index) => 
-            <div key={index}>
-            <Box gridRow={1} sx={{
-              justifyContent: "center"
-            }}>
-              <Box onClick={() => onClickHandler(category)}>
-                <Avatar sx={{m: '0 auto', width: '100px',
-                height: '100px'}}></Avatar>
-                <StyledP >{category.name}</StyledP>
+              <div key={index}>
+              <Box gridRow={1} sx={{
+                justifyContent: "center"
+              }}>
+                <Box onClick={() => onClickHandler(category)}>
+                  <Avatar sx={{m: '0 auto', width: '100px',
+                  height: '100px'}}></Avatar>
+                  <StyledP >{category.name}</StyledP>
+                </Box>
               </Box>
-            </Box>
-            </div>
+              </div>
             )}
         </Box>
     </div>
