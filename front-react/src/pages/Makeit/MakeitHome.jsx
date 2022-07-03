@@ -14,15 +14,17 @@ import { fetchItemOptions, selectCate } from '../../reducers/categoryApi'
 function MakeitHome() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const headers = ["카테고리", "이번주 가장 인기 많은 제품!", "이 제품 어때요?"];
+  const headers = [
+    "카테고리", 
+    "이번주 가장 인기 많은 제품!", 
+    "이 제품 어때요?"
+  ];
   const allCategories = useSelector((state) => state.category.allCategories);
 
 
    const onClickHandler = (e) => {
-    dispatch(selectCate(
-      allCategories[e.id-1]
-    ))
-    navigate('/makeit/category', {selected : e.id})
+    dispatch(selectCate(allCategories[e.id-1]));
+    navigate('/makeit/category', {selected : e.id});
    }
 
    useEffect(() => {

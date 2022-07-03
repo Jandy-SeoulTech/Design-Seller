@@ -1,5 +1,5 @@
 import { Avatar, Box } from '@mui/material'
-import { React, useState } from 'react'
+import { React } from 'react'
 import { useSelector } from 'react-redux';
 import styled from "styled-components";
 

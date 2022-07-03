@@ -13,8 +13,9 @@ function MakeitOrder() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {id} = useParams();
-    const [cookie, ] = useCookies(['user_token']);
+    const [cookie] = useCookies(['user_token']);
     const uploadSuccess = useSelector(state => state.purchase.fileUploadState);
+
     const shoppingList = useSelector(state => state.purchase.shoppingList);
     const totalPrice = useSelector(state => state.purchase.totalPrice)
     const itemInfo = useSelector(state => state.category.itemInfo);
@@ -22,8 +23,13 @@ function MakeitOrder() {
     const dateStr = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일";
 
     useEffect(() => {
-        if (Object.keys(itemInfo).length === 0 || shoppingList.length === 0) {alert("옵션을 하나 이상 선택하세요"); navigate(-1); }
-        if (cookie.user_token === undefined) {alert("로그인 세션이 없습니다."); navigate(-1);}
+        if (Object.keys(itemInfo).length === 0 || shoppingList.length === 0) {
+            alert("옵션을 하나 이상 선택하세요"); navigate(-1);
+        }
+        if (cookie.user_token === undefined) {
+            alert("로그인 세션이 없습니다."); 
+            navigate(-1);
+        }
     }, )
 
     
@@ -34,7 +40,6 @@ function MakeitOrder() {
                 prodId: itemInfo.id,
                 shoppingList : optionList,
             }
-            console.log(payload);
             dispatch(setRequestItems(payload))
             // const nexturl = "/makeit/purchase/"+id+"/"+cookie.user_token;
             // return navigate(nexturl);

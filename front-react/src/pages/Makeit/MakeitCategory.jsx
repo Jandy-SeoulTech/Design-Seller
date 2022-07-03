@@ -8,16 +8,22 @@ import ListIndexPage from '../../components/common/list/ListIndexPage'
 import { flushShoppingList } from '../../reducers/purchaseApi'
 import { Header } from '../../components/common'
 
-function MakeitCategory() {
+function MakeitCategory(props) {
   const dispatch = useDispatch();
   const listOptions = useSelector((state) => state.category.listfetchOptions);
   const items = useSelector(state => state.category.itemList);
 
   useEffect(() => {
-    dispatch(fetchItemOptions());
-    dispatch(fetchItemList(listOptions));
-    dispatch(flushShoppingList());
-  },)
+    if (props.link === "product") {
+      dispatch(fetchItemOptions());
+      dispatch(fetchItemList(listOptions));
+      dispatch(flushShoppingList());
+    } else {
+      dispatch(fetchItemOptions());
+      dispatch(fetchItemList(listOptions));
+      dispatch(flushShoppingList());
+    }
+  });
   
   
   return (
