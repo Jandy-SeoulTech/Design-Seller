@@ -1,16 +1,21 @@
 import React from 'react'
-import {Box} from '@mui/material'
+import {Box, Button} from '@mui/material'
 import ImgSlicker from '../common/ImgSlicker'
 import styled from 'styled-components'
 import btnSubmit from "../../assets/img/orderBtn.png"
 import ItemOptionSelector from './ItemOptionSelector'
-import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie'
 
 function ItemSummary({itemInfo}) {
+    const navigate = useNavigate();
     const {id, company, name, productionThumbnailImage, category, options ,description, like} = itemInfo;
-    const [cookies, setCookie] = useCookies(['user_token']);
-    console.log('cookies',cookies);
+    const [cookies, ] = useCookies(['user_token']);
+
+    const goOrderHandler = () => {
+        navigate(`/makeit/order/${id}/${cookies.user_token}`)
+    }
+
   return (
     <Box display="grid" gridTemplateColumns="repeat(2,1fr)" gap={6} sx={{
         maxWidth: 'lg',
@@ -43,7 +48,7 @@ function ItemSummary({itemInfo}) {
                 <ItemOptionSelector options={options}></ItemOptionSelector>
             </ItemDetails>
             <Box sx={{mt: 5,}}>
-            <Link to={`/makeit/order/${id}/${cookies.user_token}`}><img src={btnSubmit} alt="orderSubmit"></img></Link>
+            <Button onClick={goOrderHandler}><img src={btnSubmit} alt="orderSubmit"></img></Button>
             </Box>
         </Box>
     </Box>
@@ -57,7 +62,7 @@ const ItemName = styled.h2`
 `
 const Line = styled.hr`
   border: solid 0.2px #ebebeb;
-  width: 92%;
+  width: 100%;
 `;
 
 const ItemDetails = styled.div`
@@ -66,11 +71,11 @@ const ItemDetails = styled.div`
     margin-bottom : 50px
 `
 
-const ItemDetailLabel = styled.ul`
+const ItemDetailLabel = styled.div`
     position : absolute;
     left : 10px;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 50px;
     font-weight : bold;
     margin-botton: 30px;
 `

@@ -15,9 +15,9 @@ function MakeitHome() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const headers = [
-    "카테고리",
-    "이번주 가장 인기 많은 제품!",
-    "이 제품 어때요?",
+    "카테고리", 
+    "이번주 가장 인기 많은 제품!", 
+    "이 제품 어때요?"
   ];
   const allCategories = useSelector((state) => state.category.allCategories);
 
@@ -26,7 +26,12 @@ function MakeitHome() {
     navigate("/makeit/category", { selected: e.id });
   };
 
-  useEffect(() => {
+   const onClickHandler = (e) => {
+    dispatch(selectCate(allCategories[e.id-1]));
+    navigate('/makeit/category', {selected : e.id});
+   }
+
+   useEffect(() => {
     dispatch(fetchItemOptions());
   }, [dispatch]);
 
@@ -36,15 +41,12 @@ function MakeitHome() {
       <Banner />
       <Container sx={{ alignItems: "center" }}>
         <Box maxWidth="lg" minWidth="sm">
-          <SearchBox />
-          <ListCircle1x5
-            header={headers[0]}
-            onClickHandler={onClickHandler}
-          ></ListCircle1x5>
-          <Divider></Divider>
-          <ListSquare1x4 header={headers[1]}></ListSquare1x4>
-          <Divider></Divider>
-          <ListSquare1x5 header={headers[2]} link="makeit"></ListSquare1x5>
+            <SearchBox/>
+              <ListCircle1x5 header={headers[0]} onClickHandler={onClickHandler}></ListCircle1x5>
+              <Divider></Divider>
+              <ListSquare1x4 header={headers[1]} link="makeit/detail" ></ListSquare1x4>
+              <Divider></Divider>
+              <ListSquare1x5 header={headers[2]} link="makeit/detail"></ListSquare1x5>
         </Box>
       </Container>
     </div>

@@ -1,35 +1,50 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { Box, Container, Divider, Typography, Button } from "@mui/material";
-import styled from "styled-components";
-import Header from "../../components/common/Header";
-import DesignUploader from "../../components/makeitPage/DesignUploader";
-import purchaseBtn from "../../assets/img/purchaseBtn.png";
+import React, {useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom'
+import { useCookies } from 'react-cookie';
+import { Box, Container, Divider, Typography, Button } from '@mui/material';
+import styled from 'styled-components';
+import Header from '../../components/common/Header';
+import DesignUploader from '../../components/makeitPage/DesignUploader';
+import purchaseBtn from '../../assets/img/purchaseBtn.png'
+import { setRequestItems } from '../../reducers/purchaseApi';
 
 function MakeitOrder() {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const [cookie] = useCookies(["user_token"]);
-  const uploadSuccess = useSelector((state) => state.purchase.fileUploadState);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {id} = useParams();
+    const [cookie] = useCookies(['user_token']);
+    const uploadSuccess = useSelector(state => state.purchase.fileUploadState);
 
-  const shoppingList = useSelector((state) => state.purchase.shoppingList);
-  const totalPrice = useSelector((state) => state.purchase.totalPrice);
-  const itemInfo = useSelector((state) => state.category.itemInfo);
-  const now = new Date();
-  const dateStr =
-    now.getFullYear() +
-    "년 " +
-    (now.getMonth() + 1) +
-    "월 " +
-    now.getDate() +
-    "일";
+    const shoppingList = useSelector(state => state.purchase.shoppingList);
+    const totalPrice = useSelector(state => state.purchase.totalPrice)
+    const itemInfo = useSelector(state => state.category.itemInfo);
+    const now = new Date();
+    const dateStr = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일";
 
-  useEffect(() => {
-    if (Object.keys(itemInfo).length === 0 || shoppingList.length === 0) {
-      alert("옵션을 하나 이상 선택하세요");
-      navigate(-1);
+    useEffect(() => {
+        if (Object.keys(itemInfo).length === 0 || shoppingList.length === 0) {
+            alert("옵션을 하나 이상 선택하세요"); navigate(-1);
+        }
+        if (cookie.user_token === undefined) {
+            alert("로그인 세션이 없습니다."); 
+            navigate(-1);
+        }
+    }, )
+
+    
+    const nextLink = (e) => {
+        if (uploadSuccess === "completed") {
+            let optionList = shoppingList.map(({id, amount}) => Object.assign({}, {id : id, count: amount}))
+            let payload = {
+                prodId: itemInfo.id,
+                shoppingList : optionList,
+            }
+            dispatch(setRequestItems(payload))
+            // const nexturl = "/makeit/purchase/"+id+"/"+cookie.user_token;
+            // return navigate(nexturl);
+        }
+        else (alert('도안 파일이 업로드 되지 않았습니다.'))
     }
     if (cookie.user_token === undefined) {
       alert("로그인 세션이 없습니다.");

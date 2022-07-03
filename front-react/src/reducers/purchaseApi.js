@@ -11,10 +11,10 @@ const initialStateValue = {
             street : "",
             zipcode : "",
         },
-        options : [{
-            count : 0,
-            productionOptionId: 0
-        }],
+        options : [
+            // {count : 0,
+            // productionOptionId: 0}
+        ],
         productionId : 0,
         requestFiles : [
             
@@ -26,7 +26,7 @@ const initialStateValue = {
         }
     },
     requestState : "incompleted", // | completed
-    purchaseState: "incompleted", // | completed
+    purchaseState: "incompleted", // | completedW
     fileUploadState : "incompleted" // | completed
 }
 
@@ -57,17 +57,24 @@ const purchaseSlice = createSlice({
             state.totalPrice = action.payload;
         },
         flushShoppingList : (state, action) => {
-            state = initialStateValue;
+            Object.assign(state, initialStateValue);
         },
         setFileStoragePath : (state, action) => {
             state.requestData.requestFiles = action.payload.filepath;
             state.fileUploadState = action.payload.state;
         },
         setRequesterInfo : (state, action) => {
-            state.requester = action.payload;
+            state.requestData.requester = action.payload;
+        },
+        setAddressInfo : (state, action) => {
+            state.requestData.address = action.payload;
+        },
+        setRequestItems : (state, action) => {
+            state.requestData.productionId = action.payload.prodId;
+            state.requestData.options = action.payload.shoppingList;
         }
     }
 })
 
 export default purchaseSlice;
-export const {setShoppingList, setTotalPrice, flushShoppingList, setFileStoragePath,setRequesterInfo} = purchaseSlice.actions;
+export const {setShoppingList, setTotalPrice, flushShoppingList, setFileStoragePath,setRequesterInfo, setAddressInfo, setRequestItems} = purchaseSlice.actions;

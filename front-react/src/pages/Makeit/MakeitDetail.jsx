@@ -12,12 +12,11 @@ function MakeitDetail() {
   const dispatch = useDispatch();
   const itemInfo = useSelector((state) => state.category.itemInfo);
 
-  useEffect(() => {
-    dispatch(fetchItemDetail(id));
-  }, [dispatch, id]);
 
-  console.log(id);
-  console.log(itemInfo);
+    useEffect(() => {
+      dispatch(fetchItemDetail(id))
+    }, [dispatch, id])
+
   return (
     <div>
       <Header></Header>
