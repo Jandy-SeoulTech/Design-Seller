@@ -11,8 +11,8 @@ import { Header } from '../../components/common'
 function MakeitCategory(props) {
   const dispatch = useDispatch();
   const listOptions = useSelector((state) => state.category.listfetchOptions);
-  const items = useSelector(state => state.category.itemList);
-
+  const items = useSelector((state) => state.category.itemList);
+  console.log(props);
   useEffect(() => {
     if (props.link === "product") {
       dispatch(fetchItemOptions());
@@ -24,7 +24,6 @@ function MakeitCategory(props) {
       dispatch(flushShoppingList());
     }
   });
-  
   
   return (
     <div>
@@ -38,8 +37,17 @@ function MakeitCategory(props) {
             <br></br>
             <ListIndexPage items={items}></ListIndexPage>
         </Box>
+        <br></br>
+        <DetailOptionSelector label="종류"></DetailOptionSelector>
+        <br></br>
+        {props.link === "product" ? (
+          <ListIndexPage items={items}></ListIndexPage>
+        ) : (
+          <ListIndexPage items={items}></ListIndexPage>
+        )}
+      </Box>
     </div>
-  )
+  );
 }
 
-export default MakeitCategory
+export default MakeitCategory;
