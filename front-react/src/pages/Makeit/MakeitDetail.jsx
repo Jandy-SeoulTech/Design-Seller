@@ -20,7 +20,7 @@ function MakeitDetail() {
   return (
     <div>
       <Header></Header>
-      <Box>
+      <Box sx={{mt: 10}}>
         <Container sx={{ mb: 10 }}>
           <ItemSummary itemInfo={itemInfo}></ItemSummary>
         </Container>

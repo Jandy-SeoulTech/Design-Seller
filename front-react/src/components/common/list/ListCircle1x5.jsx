@@ -14,7 +14,7 @@ function ListCircle1x5({header, lists, onClickHandler}) {
   return (
     <div>
       <StyledH>{header}</StyledH>
-        <Box display="grid" gridTemplateColumns="repeat(5,1fr)" gap={2}
+        <Box display="grid" gridTemplateColumns="repeat(6,1fr)" gap={2}
             sx={{
               mt : 4,
               mb : 4,

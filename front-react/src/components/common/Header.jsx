@@ -1,23 +1,24 @@
 import { React } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import logoImg from "./../../assets/img/m2m.png"
 
 function Header(props) {
   const [loginCookie, ] = useCookies([]);
   const {user_token, nick_name} = loginCookie;
-  
+  const nav = useNavigate();
 
   return (
     <>
-      <Logo
+      <StyledUl>
+      <StyledLi
         onClick={() => {
-          // window.history.go("/");
+          nav('/')
         }}
       >
-        로고
-      </Logo>
-      <ul style={{ listStyle: "none" }}>
+        <img src={logoImg} alt="m2m"></img>
+      </StyledLi>
         <StyledLi>
           <StyledLink to="/">market</StyledLink>
         </StyledLi>
@@ -48,7 +49,7 @@ function Header(props) {
             <StyledLink to="/">회원가입</StyledLink>
           </StyledLi>
         )}
-      </ul>
+      </StyledUl>
     </>
   );
 }
@@ -59,18 +60,25 @@ const Logo = styled.div`
 const StyledLi = styled.li`
   list-style: none;
   display: inline-block;
-  margin: 10px 10px;
+  margin: 20px 30px;
   height: 14px;
   font-size: 12px;
-  line-height: 14px;
+  line-height: 9px;
   position: relative;
   cursor: pointer;
   align-items: center;
+  
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
   cursor: pointer;
   font-size: 20px;
 `;
+
+const StyledUl = styled.ul`
+  listStyle : none;
+  justify-content : space-between;
+  width : 100vw;
+`
 
 export default Header;

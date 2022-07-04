@@ -12,18 +12,19 @@ function MakeitCategory(props) {
   const dispatch = useDispatch();
   const listOptions = useSelector((state) => state.category.listfetchOptions);
   const items = useSelector((state) => state.category.itemList);
-  console.log(props);
+  
   useEffect(() => {
     if (props.link === "product") {
+      dispatch(flushShoppingList());
       dispatch(fetchItemOptions());
       dispatch(fetchItemList(listOptions));
-      dispatch(flushShoppingList());
     } else {
+      console.log('실행');
+      dispatch(flushShoppingList());
       dispatch(fetchItemOptions());
       dispatch(fetchItemList(listOptions));
-      dispatch(flushShoppingList());
     }
-  });
+  }, [dispatch, listOptions, props.link]);
   
   return (
     <div>
@@ -33,18 +34,18 @@ function MakeitCategory(props) {
                 <OptionSelector ></OptionSelector>
             </Box>
             <br></br>
-            <DetailOptionSelector label="종류"></DetailOptionSelector>
+            <DetailOptionSelector></DetailOptionSelector>
             <br></br>
             <ListIndexPage items={items}></ListIndexPage>
         </Box>
         <br></br>
-        <DetailOptionSelector label="종류"></DetailOptionSelector>
-        <br></br>
-        {props.link === "product" ? (
+        {/* <DetailOptionSelector label="종류"></DetailOptionSelector>
+        <br></br> */}
+        {/* {props.link === "product" ? (
           <ListIndexPage items={items}></ListIndexPage>
         ) : (
           <ListIndexPage items={items}></ListIndexPage>
-        )}
+        )} */}
     </div>
   )
 }
