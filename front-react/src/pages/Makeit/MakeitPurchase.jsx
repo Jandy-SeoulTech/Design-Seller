@@ -1,5 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 // import { useParams, useNavigate } from 'react-router-dom'
 // import { useCookies } from 'react-cookie';
 import { Box, Container, Divider, Button } from "@mui/material";
@@ -8,13 +9,31 @@ import Header from "../../components/common/Header";
 import InputRequesterInfo from "../../components/makeitPage/InputRequesterInfo";
 import InputDeliveryInfo from "../../components/makeitPage/InputDeliveryInfo";
 import purchaseBtn from "../../assets/img/purchaseBtn.png";
+import { useCookies } from "react-cookie";
+import {API_BASE_URL} from "../../reducers/APIconfig"
 
 function MakeitPurchase() {
-  // const {id} = useParams();
-  // const [cookie, ] = useCookies(['user_token']);
   const totalPrice = useSelector((state) => state.purchase.totalPrice);
-  // const now = new Date();
-  // const dateStr = now.getFullYear() + "년 " + (now.getMonth()+1) + "월 " + now.getDate() + "일";
+  const requestData = useSelector((state) => state.purchase.requestData);
+  const [cookies, ] = useCookies([]);
+
+  const sendRequestHandler = () => {
+    const token = cookies.user_token;
+    const data = JSON.stringify(requestData);
+    postRequestNew(data,token);
+  }
+
+  const postRequestNew = async (data,token) => {
+    try {
+        const response = await axios.post(API_BASE_URL + "/request/new", data, 
+        { headers : { "Content-Type": "application/json", Authorization: token }}
+        )
+        return response.data;
+    } catch (err) {
+        return err.message;
+    }
+} 
+
   return (
     <div>
       <Header></Header>
@@ -38,12 +57,11 @@ function MakeitPurchase() {
         <InputRequesterInfo></InputRequesterInfo>
         <br></br>
         <br></br>
-
         <InputDeliveryInfo></InputDeliveryInfo>
         <br></br>
         <br></br>
         <br></br>
-        <Button>
+        <Button onClick={sendRequestHandler}>
           <Box component="img" src={purchaseBtn}></Box>
         </Button>
       </Container>

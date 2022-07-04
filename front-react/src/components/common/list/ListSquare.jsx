@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 function ListSquare({header, column, items, link}) {
     const gridCols = `repeat(${column}, 1fr)`;
-    
+    const size = 1100/column;
 
   return (
     <div>
@@ -16,12 +16,12 @@ function ListSquare({header, column, items, link}) {
             mt : 4,
             mb : 4,
           }}>
-          {items.map((item, index) => 
+          {items && items.map((item, index) => 
           <div key={index}>
           <Box gridRow={1} sx={{
               textAlign: 'left' 
           }}>
-            <ListSquareEle item={item} size={220} link={link}></ListSquareEle>
+            <ListSquareEle item={item} size={size} link={link}></ListSquareEle>
           </Box>
           </div>
           )}

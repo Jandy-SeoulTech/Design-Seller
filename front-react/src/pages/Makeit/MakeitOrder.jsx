@@ -35,7 +35,7 @@ function MakeitOrder() {
     
     const nextLink = (e) => {
         if (uploadSuccess === "completed") {
-            let optionList = shoppingList.map(({id, amount}) => Object.assign({}, {id : id, count: amount}))
+            let optionList = shoppingList.map(({id, amount}) => Object.assign({}, {productionOptionId : id, count: amount}))
             let payload = {
                 prodId: itemInfo.id,
                 shoppingList : optionList,

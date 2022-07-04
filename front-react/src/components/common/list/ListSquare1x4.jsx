@@ -4,10 +4,9 @@ import ListSquareEle from './element/ListSquareEle'
 import styled from "styled-components";
 import { useSelector } from 'react-redux';
 
-function ListCircle1x4({header, items}) {
+function ListCircle1x4({header, items = []}) {
     //Type: 얻어오는 데이터에 따라 market or makeit로 구분 -> 하위 element의 link 가 바뀌게 됨
     const [type, settype] = useState('makeit');
-    
 
   return (
     <div>

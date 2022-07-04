@@ -1,30 +1,24 @@
-import React, {useState, useEffect} from 'react'
-import { useDispatch } from 'react-redux';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Box, TextField, Divider, Button, Modal} from '@mui/material'
+import { Box, TextField, Divider } from '@mui/material'
+import { setAddressInfo } from '../../reducers/purchaseApi';
 
 import SearchAddress from './SearchAddress';
 
 function InputDeliveryInfo({props}) {
-    const [addressInfo, setAddressInfo] = useState(
-        {
-            street : "",
-            zipcode : "",
-            detail : "",
-        }
-    );
-
+    const dispatch = useDispatch();
+    const addressInfo = useSelector(state => state.purchase.requestData.address);
     const detailHandler = (e) => {
-        setAddressInfo({...addressInfo, detail : e.currentTarget.value});
+        dispatch(setAddressInfo({...addressInfo, detail : e.currentTarget.value}));
     }
     
     const addressHandler = (street, zipcode) => {
-        console.log(street, zipcode);
-        setAddressInfo({
+        dispatch(setAddressInfo({
             ...addressInfo,
             street : street,
             zipcode : zipcode
-        })
+        }))
     }
     
 

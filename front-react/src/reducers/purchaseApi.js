@@ -1,6 +1,4 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
-import axios from "axios";
-import {API_BASE_URL} from "./APIconfig";
+import { createSlice } from "@reduxjs/toolkit"
 
 const initialStateValue = {
     shoppingList: [],
@@ -32,19 +30,20 @@ const initialStateValue = {
 
 
 //제작 요청 의뢰
-export const postRequestNew = createAsyncThunk("purchase/SEND_REQUEST", async (formData, access_token) => {
-    try {
-        const response = await axios({
-            method : "post",
-            url: API_BASE_URL + "/request/new",
-            data : formData,
-            headers : {"Content-Type": "multipart/form-data", Authorization: access_token }
-        })
-        return response.data;
-    } catch (err) {
-        return err.message;
-    }
-}) 
+// export const postRequestNew = createAsyncThunk("purchase/SEND_REQUEST", async () => {
+//     console.log(access_token);
+//     try {
+//         const response = await axios({
+//             method : "post",
+//             url: API_BASE_URL + "/request/new",
+//             data : formData,
+//             headers : {"Content-Type": "application/json", Authorization: access_token }
+//         })
+//         return response.data;
+//     } catch (err) {
+//         return err.message;
+//     }
+// }) 
 
 const purchaseSlice = createSlice({
     name : "purchase",
@@ -73,7 +72,7 @@ const purchaseSlice = createSlice({
             state.requestData.productionId = action.payload.prodId;
             state.requestData.options = action.payload.shoppingList;
         }
-    }
+    },
 })
 
 export default purchaseSlice;
